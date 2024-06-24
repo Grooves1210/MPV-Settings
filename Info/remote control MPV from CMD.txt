@@ -1,0 +1,18 @@
+# can be run from any folder position, ie doesn't have to cd to MPV's folder
+
+# requires mpv to listen for commands, so added to mpv.conf:
+input-ipc-server=\\.\pipe\mpv-pipe   
+#(mpv-pipe is user choosen name, some use mpvsocket, etc)
+
+# set volume to 10
+echo { "command": ["set_property", "volume", "10"] } >\\.\pipe\mpv-pipe
+
+# pause
+echo { "command": ["set_property", "pause", true] } >\\.\pipe\mpv-pipe
+
+# play
+echo { "command": ["set_property", "pause", false] } >\\.\pipe\mpv-pipe
+
+# example batch file to pause and exit fullscreen
+echo { "command": ["set_property", "fullscreen", false] } >\\.\pipe\mpv-pipe
+echo { "command": ["set_property", "pause", true] } >\\.\pipe\mpv-pipe
